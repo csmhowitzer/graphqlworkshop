@@ -11,10 +11,11 @@ public static class TrackDataLoaders
         IReadOnlyList<int> ids,
         ApplicationDbContext dbContext,
         ISelectorBuilder selector,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        return await dbContext.Tracks
-            .AsNoTracking()
+        return await dbContext
+            .Tracks.AsNoTracking()
             .Where(t => ids.Contains(t.Id))
             .Select(t => t.Id, selector)
             .ToDictionaryAsync(t => t.Id, cancellationToken);
@@ -25,10 +26,11 @@ public static class TrackDataLoaders
         IReadOnlyList<int> trackIds,
         ApplicationDbContext dbContext,
         ISelectorBuilder selector,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        return await dbContext.Tracks
-            .AsNoTracking()
+        return await dbContext
+            .Tracks.AsNoTracking()
             .Where(t => trackIds.Contains(t.Id))
             .Select(t => t.Id, t => t.Sessions, selector)
             .ToDictionaryAsync(r => r.Key, r => r.Value.ToArray(), cancellationToken);

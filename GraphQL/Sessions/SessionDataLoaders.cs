@@ -11,10 +11,11 @@ public static class SesisonDataLoaders
         IReadOnlyList<int> ids,
         ApplicationDbContext dbContext,
         ISelectorBuilder selector,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        return await dbContext.Sessions
-            .AsNoTracking()
+        return await dbContext
+            .Sessions.AsNoTracking()
             .Where(s => ids.Contains(s.Id))
             .Select(s => s.Id, selector)
             .ToDictionaryAsync(s => s.Id, cancellationToken);
@@ -25,10 +26,11 @@ public static class SesisonDataLoaders
         IReadOnlyList<int> sessionIds,
         ApplicationDbContext dbContext,
         ISelectorBuilder selector,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        return await dbContext.Sessions
-            .AsNoTracking()
+        return await dbContext
+            .Sessions.AsNoTracking()
             .Where(s => sessionIds.Contains(s.Id))
             .Select(s => s.Id, s => s.SessionSpeakers.Select(ss => ss.Speaker), selector)
             .ToDictionaryAsync(r => r.Key, r => r.Value.ToArray(), cancellationToken);
@@ -39,10 +41,11 @@ public static class SesisonDataLoaders
         IReadOnlyList<int> sessionIds,
         ApplicationDbContext dbContext,
         ISelectorBuilder selector,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        return await dbContext.Sessions
-            .AsNoTracking()
+        return await dbContext
+            .Sessions.AsNoTracking()
             .Where(s => sessionIds.Contains(s.Id))
             .Select(s => s.Id, s => s.SessionAttendees.Select(sa => sa.Attendee), selector)
             .ToDictionaryAsync(r => r.Key, r => r.Value.ToArray(), cancellationToken);

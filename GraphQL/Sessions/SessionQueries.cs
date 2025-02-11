@@ -10,25 +10,29 @@ public static class SessionQueries
 {
     public static async Task<IEnumerable<Session>> GetSessionsAsync(
         ApplicationDbContext dbContext,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return await dbContext.Sessions.AsNoTracking().ToListAsync(cancellationToken);
     }
+
     [NodeResolver]
     public static async Task<Session?> GetSessionByIdAsync(
-        int id, 
+        int id,
         ISessionByIdDataLoader sessionById,
         ISelection selection,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return await sessionById.Select(selection).LoadAsync(id, cancellationToken);
     }
-    
+
     public static async Task<IEnumerable<Session>> GetSessionsByIdAsync(
         [ID<Session>] int[] ids,
         ISessionByIdDataLoader sessionById,
         ISelection selection,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return await sessionById.Select(selection).LoadRequiredAsync(ids, cancellationToken);
     }

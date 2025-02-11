@@ -8,7 +8,8 @@ public static class TrackMutations
     public static async Task<Track> AddTrackAsync(
         AddTrackInput input,
         ApplicationDbContext dbContext,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var track = new Track { Name = input.Name };
 
@@ -23,7 +24,8 @@ public static class TrackMutations
     public static async Task<Track> RenameTrackAsync(
         RenameTrackInput input,
         ApplicationDbContext dbContext,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var track = await dbContext.Tracks.FindAsync([input.Id], cancellationToken);
 

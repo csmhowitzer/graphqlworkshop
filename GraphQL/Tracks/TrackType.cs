@@ -11,7 +11,8 @@ public static partial class TrackType
         [Parent] Track track,
         ISessionsByTrackIdDataLoader sessionsByTrackId,
         ISelection selection,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return await sessionsByTrackId
             .Select(selection)

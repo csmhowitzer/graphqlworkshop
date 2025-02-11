@@ -6,4 +6,5 @@ public sealed record ScheduleSessionInput(
     [property: ID<Session>] int SessionId,
     [property: ID<Track>] int TrackId,
     DateTimeOffset StartTime,
-    DateTimeOffset EndTime);
+    DateTimeOffset EndTime
+);

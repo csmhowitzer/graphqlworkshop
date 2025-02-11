@@ -5,7 +5,7 @@ using HotChocolate.Execution.Processing;
 namespace ConferencePlanner.GraphQL.Attendees;
 
 [ObjectType<Attendee>]
-public static partial class AttendeeType 
+public static partial class AttendeeType
 {
     static partial void Configure(IObjectTypeDescriptor<Attendee> descriptor)
     {
@@ -15,7 +15,8 @@ public static partial class AttendeeType
             .ResolveNode(
                 async (ctx, id) =>
                     await ctx.DataLoader<IAttendeeByIdDataLoader>()
-                    .LoadAsync(id, ctx.RequestAborted));
+                        .LoadAsync(id, ctx.RequestAborted)
+            );
     }
 
     [BindMember(nameof(Attendee.SessionsAttendees))]
@@ -23,7 +24,8 @@ public static partial class AttendeeType
         [Parent] Attendee attendee,
         ISessionsByAttendeeIdDataLoader sessionsByAttendeeId,
         ISelection selection,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return await sessionsByAttendeeId
             .Select(selection)

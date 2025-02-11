@@ -5,13 +5,17 @@ namespace ConferencePlanner.GraphQL.Speakers;
 public static class SpeakerMutations
 {
     [Mutation]
-    public static async Task<Speaker> AddSpeakerAsync(AddSpeakerInput input, ApplicationDbContext dbContext, CancellationToken cancellationToken)
+    public static async Task<Speaker> AddSpeakerAsync(
+        AddSpeakerInput input,
+        ApplicationDbContext dbContext,
+        CancellationToken cancellationToken
+    )
     {
         var speaker = new Speaker
         {
             Name = input.Name,
             Bio = input.Bio,
-            Website = input.Website
+            Website = input.Website,
         };
 
         dbContext.Speakers.Add(speaker);

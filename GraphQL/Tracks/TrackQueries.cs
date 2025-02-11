@@ -10,17 +10,19 @@ public static class TrackQueries
 {
     public static async Task<IEnumerable<Track>> GetTracksAsync(
         ApplicationDbContext dbContext,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return await dbContext.Tracks.AsNoTracking().ToListAsync(cancellationToken);
     }
 
     [NodeResolver]
     public static async Task<Track?> GetTrackByIdAsync(
-        int id, 
-        ITrackByIdDataLoader trackById, 
+        int id,
+        ITrackByIdDataLoader trackById,
         ISelection selection,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return await trackById.Select(selection).LoadAsync(id, cancellationToken);
     }
@@ -29,7 +31,8 @@ public static class TrackQueries
         [ID<Track>] int[] ids,
         ITrackByIdDataLoader trackById,
         ISelection selection,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return await trackById.Select(selection).LoadRequiredAsync(ids, cancellationToken);
     }

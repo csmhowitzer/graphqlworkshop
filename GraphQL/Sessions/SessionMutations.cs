@@ -10,25 +10,19 @@ public static class SessionMutations
     public static async Task<Session> AddSessionAsync(
         AddSessionInput input,
         ApplicationDbContext dbContext,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        if(string.IsNullOrEmpty(input.Title))
+        if (string.IsNullOrEmpty(input.Title))
             throw new TitleEmptyException();
-        if(input.SpeakerIds.Count == 0)
+        if (input.SpeakerIds.Count == 0)
             throw new NoSpeakerException();
 
-        var session = new Session
-        {
-            Title = input.Title,
-            Abstract = input.Abstract
-        };
+        var session = new Session { Title = input.Title, Abstract = input.Abstract };
 
         foreach (var speakerId in input.SpeakerIds)
         {
-            session.SessionSpeakers.Add(new SessionSpeaker
-            {
-                SpeakerId = speakerId
-            });
+            session.SessionSpeakers.Add(new SessionSpeaker { SpeakerId = speakerId });
         }
 
         await dbContext.SaveChangesAsync(cancellationToken);
@@ -41,9 +35,10 @@ public static class SessionMutations
     public static async Task<Session> ScheduleSessionAsync(
         ScheduleSessionInput input,
         ApplicationDbContext dbContext,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        if(input.EndTime < input.StartTime)
+        if (input.EndTime < input.StartTime)
             throw new EndTimeInvalidException();
 
         var session = await dbContext.Sessions.FindAsync([input.SessionId], cancellationToken);
@@ -62,4 +57,3 @@ public static class SessionMutations
         return session;
     }
 }
-
