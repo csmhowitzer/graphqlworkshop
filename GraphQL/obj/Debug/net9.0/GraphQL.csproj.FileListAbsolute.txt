@@ -169,3 +169,4 @@
 /Users/wwmac/Documents/projects/examples/csharp/random/GraphQLExample/GraphQL/bin/Debug/net9.0/tr/System.CommandLine.resources.dll
 /Users/wwmac/Documents/projects/examples/csharp/random/GraphQLExample/GraphQL/bin/Debug/net9.0/zh-Hans/System.CommandLine.resources.dll
 /Users/wwmac/Documents/projects/examples/csharp/random/GraphQLExample/GraphQL/bin/Debug/net9.0/zh-Hant/System.CommandLine.resources.dll
+/Users/wwmac/Documents/projects/examples/csharp/random/GraphQLExample/GraphQL/obj/Debug/net9.0/GraphQL.sourcelink.json

@@ -11,4 +11,7 @@ public sealed class Speaker
     public string? Bio { get; init; }
     [StringLength(1000)]
     public string? Website { get; init; }
+
+    public ICollection<SessionSpeaker> SessionSpeakers { get; init; } =
+        new List<SessionSpeaker>();
 }

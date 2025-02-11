@@ -482,3 +482,9 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Adding bin and obj directory ignores for the project
+/GraphQL/bin/*
+/GraphQL/obj/*
+/GraphQLTests/bin/*
+/GraphQLTests/obj/*

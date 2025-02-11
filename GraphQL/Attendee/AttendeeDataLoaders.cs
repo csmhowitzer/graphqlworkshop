@@ -21,8 +21,17 @@ public static class AttendeeDataLoaders
     }
     [DataLoader]
     public static async Task<IReadOnlyDictionary<int, Session[]>> SessionsByAttendeeIdAsync(
-            IReadOnlyList<int> attendeeIds,
-            ApplicationDbContext dbContext,
+        IReadOnlyList<int> attendeeIds,
+        ApplicationDbContext dbContext,
+        ISelectorBuilder selector,
+        CancellationToken cancellationToken)
+    {
+        return await dbContext.Attendees
+            .AsNoTracking()
+            .Where(a => attendeeIds.Contains(a.Id))
+            .Select(a => a.Id, a => a.SessionsAttendees.Select(sa => sa.Session), selector)
+            .ToDictionaryAsync(r => r.Key, r => r.Value.ToArray(), cancellationToken);
+    }
             
 }
 

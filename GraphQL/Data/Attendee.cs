@@ -10,10 +10,10 @@ public sealed class Attendee
     [StringLength(200)]
     public required string LastName { get; init; }
     [StringLength(200)]
-    public required string UserName { get; init; }
+    public required string Username { get; init; }
     [StringLength(256)]
     public string? EmailAddress { get; init; }
     
-    public ICollection<SessionAttendee> SessionAttendees { get; init; } = 
+    public ICollection<SessionAttendee> SessionsAttendees { get; init; } = 
         new List<SessionAttendee>();
 }
