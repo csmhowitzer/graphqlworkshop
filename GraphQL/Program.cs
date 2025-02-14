@@ -1,5 +1,4 @@
 using ConferencePlanner.GraphQL.Data;
-using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +8,8 @@ builder
         options.UseNpgsql("Host=127.0.0.1;Username=graphql_workshop;Password=secret")
     )
     .AddGraphQLServer()
+    .AddGlobalObjectIdentification()
+    .AddMutationConventions()
     .AddGraphQLTypes();
 
 var app = builder.Build();

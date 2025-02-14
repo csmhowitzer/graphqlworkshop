@@ -1,4 +1,5 @@
 using ConferencePlanner.GraphQL.Data;
+using ConferencePlanner.GraphQL.Extensions;
 using GreenDonut.Data;
 using HotChocolate.Execution.Processing;
 
@@ -17,5 +18,10 @@ public static partial class TrackType
         return await sessionsByTrackId
             .Select(selection)
             .LoadRequiredAsync(track.Id, cancellationToken);
+    }
+
+    static partial void Configure(IObjectTypeDescriptor<Track> descriptor)
+    {
+        descriptor.Field(t => t.Name).ParentRequires(nameof(Track.Name)).UseUpperCase();
     }
 }
